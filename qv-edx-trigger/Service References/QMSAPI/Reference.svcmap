@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="dfc26f5d-f4f9-48fa-8dde-7683d3577331" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://sesth-rfn:4799/QMS/Service" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="Service.xsd" MetadataType="Schema" ID="41b916dc-531c-4843-99ef-2115ea51685b" SourceId="1" SourceUrl="http://sesth-rfn:4799/QMS/Service?xsd=xsd9" />
+    <MetadataFile FileName="QMSBackendService.wsdl" MetadataType="Wsdl" ID="93979a8c-d856-4289-8390-8fedf17f8a18" SourceId="1" SourceUrl="http://sesth-rfn:4799/QMS/Service" />
+    <MetadataFile FileName="Service1.xsd" MetadataType="Schema" ID="71fa2e53-7f28-4926-ba3c-ac3b44fdd7d0" SourceId="1" SourceUrl="http://sesth-rfn:4799/QMS/Service?xsd=xsd6" />
+    <MetadataFile FileName="Service.wsdl" MetadataType="Wsdl" ID="20dd7c7e-73ba-4f1a-9450-a9a9ac4fca98" SourceId="1" SourceUrl="http://sesth-rfn:4799/QMS/Service?wsdl=wsdl0" />
+    <MetadataFile FileName="Service2.xsd" MetadataType="Schema" ID="fdf1100a-6a3d-419e-b687-1ee42fe4304f" SourceId="1" SourceUrl="http://sesth-rfn:4799/QMS/Service?xsd=xsd4" />
+    <MetadataFile FileName="Service3.xsd" MetadataType="Schema" ID="278aedcd-ca17-4be6-98b2-d6d962a5505c" SourceId="1" SourceUrl="http://sesth-rfn:4799/QMS/Service?xsd=xsd0" />
+    <MetadataFile FileName="Service4.xsd" MetadataType="Schema" ID="b4127cb2-c628-47de-9532-9740d84539a4" SourceId="1" SourceUrl="http://sesth-rfn:4799/QMS/Service?xsd=xsd8" />
+    <MetadataFile FileName="Service5.xsd" MetadataType="Schema" ID="9be530e1-0b43-41ec-88a3-6dd322a110be" SourceId="1" SourceUrl="http://sesth-rfn:4799/QMS/Service?xsd=xsd10" />
+    <MetadataFile FileName="Service6.xsd" MetadataType="Schema" ID="40020562-3287-4c7b-9b6c-982f212daba5" SourceId="1" SourceUrl="http://sesth-rfn:4799/QMS/Service?xsd=xsd7" />
+    <MetadataFile FileName="Service7.xsd" MetadataType="Schema" ID="fbef3385-cfba-4034-8cc0-9d9553d52aba" SourceId="1" SourceUrl="http://sesth-rfn:4799/QMS/Service?xsd=xsd3" />
+    <MetadataFile FileName="Service1.wsdl" MetadataType="Wsdl" ID="080c821f-6995-4c7e-9004-1fbe51852985" SourceId="1" SourceUrl="http://sesth-rfn:4799/QMS/Service?wsdl=wsdl1" />
+    <MetadataFile FileName="Service8.xsd" MetadataType="Schema" ID="c7862a49-ac41-4f01-932d-a081dee016e8" SourceId="1" SourceUrl="http://sesth-rfn:4799/QMS/Service?xsd=xsd2" />
+    <MetadataFile FileName="Service9.xsd" MetadataType="Schema" ID="77e428dc-3d9c-4cba-9c39-327fc019771f" SourceId="1" SourceUrl="http://sesth-rfn:4799/QMS/Service?xsd=xsd5" />
+    <MetadataFile FileName="Service10.xsd" MetadataType="Schema" ID="424295ed-d8ec-43c0-ac79-6325954afa0a" SourceId="1" SourceUrl="http://sesth-rfn:4799/QMS/Service?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

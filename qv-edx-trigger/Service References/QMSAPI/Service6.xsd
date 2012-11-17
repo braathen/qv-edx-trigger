@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/PIX.QMSAPI.DataObjects.Triggers" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/PIX.QMSAPI.DataObjects.Triggers" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://sesth-rfn:4799/QMS/Service?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="http://sesth-rfn:4799/QMS/Service?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/PIX.QMSAPI.DataObjects" />
+  <xs:import schemaLocation="http://sesth-rfn:4799/QMS/Service?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System" />
+  <xs:import schemaLocation="http://sesth-rfn:4799/QMS/Service?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:complexType name="ArrayOfTrigger">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Trigger" nillable="true" type="tns:Trigger" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTrigger" nillable="true" type="tns:ArrayOfTrigger" />
+  <xs:complexType name="Trigger">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Enabled" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ID" type="ser:guid" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/PIX.QMSAPI.DataObjects" minOccurs="0" name="Type" type="q1:TaskTriggerType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Trigger" nillable="true" type="tns:Trigger" />
+  <xs:complexType name="TaskEventTrigger">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Trigger">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="TaskID" type="ser:guid" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TaskEventTrigger" nillable="true" type="tns:TaskEventTrigger" />
+  <xs:complexType name="ScheduleTrigger">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Trigger">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="StartAt" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ScheduleTrigger" nillable="true" type="tns:ScheduleTrigger" />
+  <xs:complexType name="RecurrenceTrigger">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ScheduleTrigger">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Daily" nillable="true" type="tns:RecurrenceTrigger.RecurrenceTriggerDaily" />
+          <xs:element minOccurs="0" name="ExpireAt" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Hourly" nillable="true" type="tns:RecurrenceTrigger.RecurrenceTriggerHourly" />
+          <xs:element minOccurs="0" name="MaxOccurrences" type="xs:int" />
+          <xs:element minOccurs="0" name="Monthly" nillable="true" type="tns:RecurrenceTrigger.RecurrenceTriggerMonthly" />
+          <xs:element minOccurs="0" name="Weekly" nillable="true" type="tns:RecurrenceTrigger.RecurrenceTriggerWeekly" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RecurrenceTrigger" nillable="true" type="tns:RecurrenceTrigger" />
+  <xs:complexType name="RecurrenceTrigger.RecurrenceTriggerDaily">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="RecurEvery" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RecurrenceTrigger.RecurrenceTriggerDaily" nillable="true" type="tns:RecurrenceTrigger.RecurrenceTriggerDaily" />
+  <xs:complexType name="RecurrenceTrigger.RecurrenceTriggerHourly">
+    <xs:sequence>
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="DayOfWeekConstraints" nillable="true" type="q2:ArrayOfDayOfWeek" />
+      <xs:element minOccurs="0" name="RecurEvery" type="xs:int" />
+      <xs:element minOccurs="0" name="TimeConstraintFrom" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="TimeConstraintTo" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RecurrenceTrigger.RecurrenceTriggerHourly" nillable="true" type="tns:RecurrenceTrigger.RecurrenceTriggerHourly" />
+  <xs:complexType name="RecurrenceTrigger.RecurrenceTriggerMonthly">
+    <xs:sequence>
+      <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="DayConstraints" nillable="true" type="q3:ArrayOfint" />
+      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="DayOfWeekConstraints" nillable="true" type="q4:ArrayOfDayOfWeek" />
+      <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Months" nillable="true" type="q5:ArrayOfint" />
+      <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Occurrences" nillable="true" type="q6:ArrayOfint" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RecurrenceTrigger.RecurrenceTriggerMonthly" nillable="true" type="tns:RecurrenceTrigger.RecurrenceTriggerMonthly" />
+  <xs:complexType name="RecurrenceTrigger.RecurrenceTriggerWeekly">
+    <xs:sequence>
+      <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="DayOfWeekConstraints" nillable="true" type="q7:ArrayOfDayOfWeek" />
+      <xs:element minOccurs="0" name="RecurEvery" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RecurrenceTrigger.RecurrenceTriggerWeekly" nillable="true" type="tns:RecurrenceTrigger.RecurrenceTriggerWeekly" />
+  <xs:complexType name="MultipleEventTrigger">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Trigger">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="SubTriggers" nillable="true" type="tns:ArrayOfTrigger" />
+          <xs:element minOccurs="0" name="TimeConstraint" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="MultipleEventTrigger" nillable="true" type="tns:MultipleEventTrigger" />
+  <xs:complexType name="ExternalEventTrigger">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Trigger">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ExternalEventTrigger" nillable="true" type="tns:ExternalEventTrigger" />
+</xs:schema>

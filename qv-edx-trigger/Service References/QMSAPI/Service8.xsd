@@ -1,0 +1,2161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/PIX.QMSAPI.DataObjects" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/PIX.QMSAPI.DataObjects" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://sesth-rfn:4799/QMS/Service?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="http://sesth-rfn:4799/QMS/Service?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://sesth-rfn:4799/QMS/Service?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/PIX.QMSAPI.DataObjects.Enums" />
+  <xs:import schemaLocation="http://sesth-rfn:4799/QMS/Service?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/PIX.QMSAPI.DataObjects.Triggers" />
+  <xs:import schemaLocation="http://sesth-rfn:4799/QMS/Service?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System" />
+  <xs:import schemaLocation="http://sesth-rfn:4799/QMS/Service?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/PIX.QMSAPI.DataObjects.CALs" />
+  <xs:complexType name="ExtensionUploadHandle">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Position" type="xs:long" />
+      <xs:element minOccurs="0" name="QVSClusterID" type="ser:guid" />
+      <xs:element minOccurs="0" name="QVSClusterMemberID" type="ser:guid" />
+      <xs:element minOccurs="0" name="QVSHandle" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ExtensionUploadHandle" nillable="true" type="tns:ExtensionUploadHandle" />
+  <xs:complexType name="ArrayOfQVSMessage">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="QVSMessage" nillable="true" type="tns:QVSMessage" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfQVSMessage" nillable="true" type="tns:ArrayOfQVSMessage" />
+  <xs:complexType name="QVSMessage">
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="SubTexts" nillable="true" type="q1:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Text" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QVSMessage" nillable="true" type="tns:QVSMessage" />
+  <xs:simpleType name="CALConfigurationScope">
+    <xs:list>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="None">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="DocumentCALs">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="NamedCALs">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SessionCALs">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="UsageCALs">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">8</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="All">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">65535</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:list>
+  </xs:simpleType>
+  <xs:element name="CALConfigurationScope" nillable="true" type="tns:CALConfigurationScope" />
+  <xs:simpleType name="NamedCALIdentificationMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="UserName" />
+      <xs:enumeration value="MachineName" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="NamedCALIdentificationMode" nillable="true" type="tns:NamedCALIdentificationMode" />
+  <xs:complexType name="ArrayOfServerObjectMetaData">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ServerObjectMetaData" nillable="true" type="tns:ServerObjectMetaData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfServerObjectMetaData" nillable="true" type="tns:ArrayOfServerObjectMetaData" />
+  <xs:complexType name="ServerObjectMetaData">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DocumentName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OwnerId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Restricted" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Shared" type="xs:boolean" />
+      <xs:element minOccurs="0" name="SubType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UtcModifyTime" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ServerObjectMetaData" nillable="true" type="tns:ServerObjectMetaData" />
+  <xs:complexType name="ArrayOfServerObject">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ServerObject" nillable="true" type="tns:ServerObject" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfServerObject" nillable="true" type="tns:ArrayOfServerObject" />
+  <xs:complexType name="ServerObject">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OwnerId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OwnerName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Shared" type="xs:boolean" />
+      <xs:element minOccurs="0" name="SubType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Temporary" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UtcModifyTime" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ServerObject" nillable="true" type="tns:ServerObject" />
+  <xs:complexType name="ArrayOfDirectoryServiceObject">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DirectoryServiceObject" nillable="true" type="tns:DirectoryServiceObject" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDirectoryServiceObject" nillable="true" type="tns:ArrayOfDirectoryServiceObject" />
+  <xs:complexType name="DirectoryServiceObject">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OtherProperty" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Type" type="tns:DirectoryServiceObjectType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DirectoryServiceObject" nillable="true" type="tns:DirectoryServiceObject" />
+  <xs:simpleType name="DirectoryServiceObjectType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Undefined" />
+      <xs:enumeration value="Named" />
+      <xs:enumeration value="Authenticated" />
+      <xs:enumeration value="Anonymous" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="DirectoryServiceObjectType" nillable="true" type="tns:DirectoryServiceObjectType" />
+  <xs:complexType name="ArrayOfDSResource">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DSResource" nillable="true" type="tns:DSResource" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDSResource" nillable="true" type="tns:ArrayOfDSResource" />
+  <xs:complexType name="DSResource">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ErrStatus" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="ser:guid" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Path" nillable="true" type="xs:string" />
+      <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Settings" nillable="true" type="q2:ArrayOfKeyValueOfstringstring" />
+      <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DSResource" nillable="true" type="tns:DSResource" />
+  <xs:complexType name="ArrayOfDSProvider">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DSProvider" nillable="true" type="tns:DSProvider" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDSProvider" nillable="true" type="tns:ArrayOfDSProvider" />
+  <xs:complexType name="DSProvider">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DSProvider" nillable="true" type="tns:DSProvider" />
+  <xs:complexType name="QVWSAuthentication">
+    <xs:sequence>
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/PIX.QMSAPI.DataObjects.Enums" minOccurs="0" name="AuthenticationType" type="q3:QVWSAuthenticationType" />
+      <xs:element minOccurs="0" name="Header" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Prefix" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QVWSAuthentication" nillable="true" type="tns:QVWSAuthentication" />
+  <xs:simpleType name="ServiceTypes">
+    <xs:list>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="None">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="QlikViewManagementService">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="QlikViewDistributionService">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="QlikViewServer">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="QlikViewDirectoryServiceConnector">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">8</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="QlikViewWebServer">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">16</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="RemoteQlikViewManagementService">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">32</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="All">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">65535</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:list>
+  </xs:simpleType>
+  <xs:element name="ServiceTypes" nillable="true" type="tns:ServiceTypes" />
+  <xs:complexType name="ArrayOfServiceInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ServiceInfo" nillable="true" type="tns:ServiceInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfServiceInfo" nillable="true" type="tns:ArrayOfServiceInfo" />
+  <xs:complexType name="ServiceInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:anyURI" />
+      <xs:element minOccurs="0" name="ClusterNodeCount" type="xs:int" />
+      <xs:element minOccurs="0" name="ID" type="ser:guid" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Type" type="tns:ServiceTypes" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ServiceInfo" nillable="true" type="tns:ServiceInfo" />
+  <xs:simpleType name="DocumentFolderScope">
+    <xs:list>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="None">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="General">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Services">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Administrators">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="All">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">65535</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:list>
+  </xs:simpleType>
+  <xs:element name="DocumentFolderScope" nillable="true" type="tns:DocumentFolderScope" />
+  <xs:complexType name="ArrayOfDocumentFolder">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DocumentFolder" nillable="true" type="tns:DocumentFolder" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDocumentFolder" nillable="true" type="tns:ArrayOfDocumentFolder" />
+  <xs:complexType name="DocumentFolder">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Administrators" nillable="true" type="tns:DocumentFolder.DocumentFolderAdministrators" />
+      <xs:element minOccurs="0" name="General" nillable="true" type="tns:DocumentFolder.DocumentFolderGeneral" />
+      <xs:element minOccurs="0" name="ID" type="ser:guid" />
+      <xs:element minOccurs="0" name="Scope" type="tns:DocumentFolderScope" />
+      <xs:element minOccurs="0" name="Services" nillable="true" type="tns:DocumentFolder.DocumentFolderServices" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DocumentFolder" nillable="true" type="tns:DocumentFolder" />
+  <xs:complexType name="DocumentFolder.DocumentFolderAdministrators">
+    <xs:sequence>
+      <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="UserNames" nillable="true" type="q4:ArrayOfstring" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DocumentFolder.DocumentFolderAdministrators" nillable="true" type="tns:DocumentFolder.DocumentFolderAdministrators" />
+  <xs:complexType name="DocumentFolder.DocumentFolderGeneral">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Path" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SendAlertEmailForDocumentAdministrators" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Type" type="tns:DocumentFolderType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DocumentFolder.DocumentFolderGeneral" nillable="true" type="tns:DocumentFolder.DocumentFolderGeneral" />
+  <xs:simpleType name="DocumentFolderType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="User">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Source">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="DocumentFolderType" nillable="true" type="tns:DocumentFolderType" />
+  <xs:complexType name="DocumentFolder.DocumentFolderServices">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="QDSID" type="ser:guid" />
+      <xs:element minOccurs="0" name="QVSID" type="ser:guid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DocumentFolder.DocumentFolderServices" nillable="true" type="tns:DocumentFolder.DocumentFolderServices" />
+  <xs:complexType name="ArrayOfDocumentNode">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DocumentNode" nillable="true" type="tns:DocumentNode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDocumentNode" nillable="true" type="tns:ArrayOfDocumentNode" />
+  <xs:complexType name="DocumentNode">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FolderID" type="ser:guid" />
+      <xs:element minOccurs="0" name="ID" type="ser:guid" />
+      <xs:element minOccurs="0" name="IsOrphan" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsSubFolder" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RelativePath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TaskCount" type="xs:int" />
+      <xs:element minOccurs="0" name="Type" type="tns:DocumentType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DocumentNode" nillable="true" type="tns:DocumentNode" />
+  <xs:simpleType name="DocumentType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="User">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Source">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="DocumentType" nillable="true" type="tns:DocumentType" />
+  <xs:complexType name="ArrayOfTaskInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TaskInfo" nillable="true" type="tns:TaskInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTaskInfo" nillable="true" type="tns:ArrayOfTaskInfo" />
+  <xs:complexType name="TaskInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Enabled" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ID" type="ser:guid" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="QDSID" type="ser:guid" />
+      <xs:element minOccurs="0" name="Type" type="tns:TaskType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TaskInfo" nillable="true" type="tns:TaskInfo" />
+  <xs:simpleType name="TaskType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Undefined" />
+      <xs:enumeration value="DocumentTask" />
+      <xs:enumeration value="ExternalProgramTask" />
+      <xs:enumeration value="DBCommandTask" />
+      <xs:enumeration value="PauseTask" />
+      <xs:enumeration value="QvdCreationTask" />
+      <xs:enumeration value="TemplateTask" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="TaskType" nillable="true" type="tns:TaskType" />
+  <xs:simpleType name="DocumentTaskScope">
+    <xs:list>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="None">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="General">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Reload">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Reduce">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Distribute">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">8</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="DocumentInfo">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">16</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Triggering">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">32</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Server">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">64</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="All">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">65535</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:list>
+  </xs:simpleType>
+  <xs:element name="DocumentTaskScope" nillable="true" type="tns:DocumentTaskScope" />
+  <xs:complexType name="DocumentTask">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Distribute" nillable="true" type="tns:DocumentTask.TaskDistribute" />
+      <xs:element minOccurs="0" name="Document" nillable="true" type="tns:DocumentNode" />
+      <xs:element minOccurs="0" name="DocumentInfo" nillable="true" type="tns:DocumentTask.TaskDocumentInfo" />
+      <xs:element minOccurs="0" name="General" nillable="true" type="tns:DocumentTask.TaskGeneral" />
+      <xs:element minOccurs="0" name="ID" type="ser:guid" />
+      <xs:element minOccurs="0" name="QDSID" type="ser:guid" />
+      <xs:element minOccurs="0" name="Reduce" nillable="true" type="tns:DocumentTask.TaskReduce" />
+      <xs:element minOccurs="0" name="Reload" nillable="true" type="tns:DocumentTask.TaskReload" />
+      <xs:element minOccurs="0" name="Scope" type="tns:DocumentTaskScope" />
+      <xs:element minOccurs="0" name="Server" nillable="true" type="tns:DocumentTask.TaskServer" />
+      <xs:element minOccurs="0" name="Triggering" nillable="true" type="tns:DocumentTask.TaskTriggering" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DocumentTask" nillable="true" type="tns:DocumentTask" />
+  <xs:complexType name="DocumentTask.TaskDistribute">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Dynamic" nillable="true" type="tns:DocumentTask.TaskDistribute.TaskDistributeDynamic" />
+      <xs:element minOccurs="0" name="Notification" nillable="true" type="tns:DocumentTask.TaskDistribute.TaskDistributeNotification" />
+      <xs:element minOccurs="0" name="Output" nillable="true" type="tns:DocumentTask.TaskDistribute.TaskDistributeOutput" />
+      <xs:element minOccurs="0" name="Static" nillable="true" type="tns:DocumentTask.TaskDistribute.TaskDistributeStatic" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DocumentTask.TaskDistribute" nillable="true" type="tns:DocumentTask.TaskDistribute" />
+  <xs:complexType name="DocumentTask.TaskDistribute.TaskDistributeDynamic">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Destinations" nillable="true" type="tns:ArrayOfTaskDistributionDestination" />
+      <xs:element minOccurs="0" name="FieldName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IdentityType" type="tns:UserIdentityValueType" />
+      <xs:element minOccurs="0" name="ValidateEmails" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DocumentTask.TaskDistribute.TaskDistributeDynamic" nillable="true" type="tns:DocumentTask.TaskDistribute.TaskDistributeDynamic" />
+  <xs:complexType name="ArrayOfTaskDistributionDestination">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TaskDistributionDestination" nillable="true" type="tns:TaskDistributionDestination" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTaskDistributionDestination" nillable="true" type="tns:ArrayOfTaskDistributionDestination" />
+  <xs:complexType name="TaskDistributionDestination">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Folder" nillable="true" type="tns:TaskDistributionDestination.TaskDistributionDestinationFolder" />
+      <xs:element minOccurs="0" name="QlikViewServer" nillable="true" type="tns:TaskDistributionDestination.TaskDistributionDestinationQlikViewServer" />
+      <xs:element minOccurs="0" name="Type" type="tns:TaskDistributionDestinationType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TaskDistributionDestination" nillable="true" type="tns:TaskDistributionDestination" />
+  <xs:complexType name="TaskDistributionDestination.TaskDistributionDestinationFolder">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TaskDistributionDestination.TaskDistributionDestinationFolder" nillable="true" type="tns:TaskDistributionDestination.TaskDistributionDestinationFolder" />
+  <xs:complexType name="TaskDistributionDestination.TaskDistributionDestinationQlikViewServer">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="ser:guid" />
+      <xs:element minOccurs="0" name="Mount" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TaskDistributionDestination.TaskDistributionDestinationQlikViewServer" nillable="true" type="tns:TaskDistributionDestination.TaskDistributionDestinationQlikViewServer" />
+  <xs:simpleType name="TaskDistributionDestinationType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="QlikViewServer" />
+      <xs:enumeration value="Folder" />
+      <xs:enumeration value="Mail" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="TaskDistributionDestinationType" nillable="true" type="tns:TaskDistributionDestinationType" />
+  <xs:simpleType name="UserIdentityValueType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SecurityIdentifier">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DisplayName">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SAMAccountName">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">8</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="EmailAddress">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">16</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="UserPrincipalName">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">128</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="EmailAddressNoValidate">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2048</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="UserIdentityValueType" nillable="true" type="tns:UserIdentityValueType" />
+  <xs:complexType name="DocumentTask.TaskDistribute.TaskDistributeNotification">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="SendNotificationEmail" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DocumentTask.TaskDistribute.TaskDistributeNotification" nillable="true" type="tns:DocumentTask.TaskDistribute.TaskDistributeNotification" />
+  <xs:complexType name="DocumentTask.TaskDistribute.TaskDistributeOutput">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PDF" nillable="true" type="tns:DocumentTask.TaskDistribute.TaskDistributeOutput.TaskDistributeOutputPDF" />
+      <xs:element minOccurs="0" name="Type" type="tns:TaskDistributionOutputType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DocumentTask.TaskDistribute.TaskDistributeOutput" nillable="true" type="tns:DocumentTask.TaskDistribute.TaskDistributeOutput" />
+  <xs:complexType name="DocumentTask.TaskDistribute.TaskDistributeOutput.TaskDistributeOutputPDF">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ReportID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ReportName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DocumentTask.TaskDistribute.TaskDistributeOutput.TaskDistributeOutputPDF" nillable="true" type="tns:DocumentTask.TaskDistribute.TaskDistributeOutput.TaskDistributeOutputPDF" />
+  <xs:simpleType name="TaskDistributionOutputType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="QlikViewDocument" />
+      <xs:enumeration value="PDFReport" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="TaskDistributionOutputType" nillable="true" type="tns:TaskDistributionOutputType" />
+  <xs:complexType name="DocumentTask.TaskDistribute.TaskDistributeStatic">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DistributionEntries" nillable="true" type="tns:ArrayOfTaskDistributionEntry" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DocumentTask.TaskDistribute.TaskDistributeStatic" nillable="true" type="tns:DocumentTask.TaskDistribute.TaskDistributeStatic" />
+  <xs:complexType name="ArrayOfTaskDistributionEntry">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TaskDistributionEntry" nillable="true" type="tns:TaskDistributionEntry" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTaskDistributionEntry" nillable="true" type="tns:ArrayOfTaskDistributionEntry" />
+  <xs:complexType name="TaskDistributionEntry">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Destination" nillable="true" type="tns:TaskDistributionDestination" />
+      <xs:element minOccurs="0" name="Recipients" nillable="true" type="tns:ArrayOfDirectoryServiceObject" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TaskDistributionEntry" nillable="true" type="tns:TaskDistributionEntry" />
+  <xs:complexType name="DocumentTask.TaskDocumentInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Attributes" nillable="true" type="tns:ArrayOfDocumentAttribute" />
+      <xs:element minOccurs="0" name="Category" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DocumentTask.TaskDocumentInfo" nillable="true" type="tns:DocumentTask.TaskDocumentInfo" />
+  <xs:complexType name="ArrayOfDocumentAttribute">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DocumentAttribute" nillable="true" type="tns:DocumentAttribute" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDocumentAttribute" nillable="true" type="tns:ArrayOfDocumentAttribute" />
+  <xs:complexType name="DocumentAttribute">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Value" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DocumentAttribute" nillable="true" type="tns:DocumentAttribute" />
+  <xs:complexType name="DocumentTask.TaskGeneral">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Enabled" type="xs:boolean" />
+      <xs:element minOccurs="0" name="TaskDescription" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TaskName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TaskWizardTrack" type="tns:TaskWizardTrack" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DocumentTask.TaskGeneral" nillable="true" type="tns:DocumentTask.TaskGeneral" />
+  <xs:simpleType name="TaskWizardTrack">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="ReloadOnly" />
+      <xs:enumeration value="StaticDistribution" />
+      <xs:enumeration value="ReduceWithStaticDistribution" />
+      <xs:enumeration value="ReduceWithDynamicDistribution" />
+      <xs:enumeration value="DynamicDistribution" />
+      <xs:enumeration value="PersonalDocuments" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="TaskWizardTrack" nillable="true" type="tns:TaskWizardTrack" />
+  <xs:complexType name="DocumentTask.TaskReduce">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DocumentNameTemplate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Dynamic" nillable="true" type="tns:DocumentTask.TaskReduce.TaskReduceDynamic" />
+      <xs:element minOccurs="0" name="Static" nillable="true" type="tns:DocumentTask.TaskReduce.TaskReduceStatic" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DocumentTask.TaskReduce" nillable="true" type="tns:DocumentTask.TaskReduce" />
+  <xs:complexType name="DocumentTask.TaskReduce.TaskReduceDynamic">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FieldName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Type" type="tns:TaskReductionType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DocumentTask.TaskReduce.TaskReduceDynamic" nillable="true" type="tns:DocumentTask.TaskReduce.TaskReduceDynamic" />
+  <xs:simpleType name="TaskReductionType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="ByField" />
+      <xs:enumeration value="ByBookmark" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="TaskReductionType" nillable="true" type="tns:TaskReductionType" />
+  <xs:complexType name="DocumentTask.TaskReduce.TaskReduceStatic">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Reductions" nillable="true" type="tns:ArrayOfTaskReduction" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DocumentTask.TaskReduce.TaskReduceStatic" nillable="true" type="tns:DocumentTask.TaskReduce.TaskReduceStatic" />
+  <xs:complexType name="ArrayOfTaskReduction">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TaskReduction" nillable="true" type="tns:TaskReduction" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTaskReduction" nillable="true" type="tns:ArrayOfTaskReduction" />
+  <xs:complexType name="TaskReduction">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Bookmark" nillable="true" type="tns:TaskReduction.TaskReductionBookmark" />
+      <xs:element minOccurs="0" name="Field" nillable="true" type="tns:TaskReduction.TaskReductionField" />
+      <xs:element minOccurs="0" name="Type" type="tns:TaskReductionType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TaskReduction" nillable="true" type="tns:TaskReduction" />
+  <xs:complexType name="TaskReduction.TaskReductionBookmark">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TaskReduction.TaskReductionBookmark" nillable="true" type="tns:TaskReduction.TaskReductionBookmark" />
+  <xs:complexType name="TaskReduction.TaskReductionField">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IsNumeric" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Number" type="xs:double" />
+      <xs:element minOccurs="0" name="Value" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TaskReduction.TaskReductionField" nillable="true" type="tns:TaskReduction.TaskReductionField" />
+  <xs:complexType name="DocumentTask.TaskReload">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Mode" type="tns:TaskReloadMode" />
+      <xs:element minOccurs="0" name="ScriptParameterName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ScriptParameterValue" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ScriptParameterValueField" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SectionAccessMode" type="tns:QDSSectionAccessMode" />
+      <xs:element minOccurs="0" name="SectionAccessPassword" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SectionAccessUserName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DocumentTask.TaskReload" nillable="true" type="tns:DocumentTask.TaskReload" />
+  <xs:simpleType name="TaskReloadMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="Full" />
+      <xs:enumeration value="Partial" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="TaskReloadMode" nillable="true" type="tns:TaskReloadMode" />
+  <xs:simpleType name="QDSSectionAccessMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="UseQDSAccount" />
+      <xs:enumeration value="SpecifyCredentials" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="QDSSectionAccessMode" nillable="true" type="tns:QDSSectionAccessMode" />
+  <xs:complexType name="DocumentTask.TaskServer">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Access" nillable="true" type="tns:DocumentTask.TaskServer.TaskServerAccess" />
+      <xs:element minOccurs="0" name="Collaboration" nillable="true" type="tns:DocumentTask.TaskServer.TaskServerCollaboration" />
+      <xs:element minOccurs="0" name="DocumentLoading" nillable="true" type="tns:DocumentTask.TaskServer.TaskServerDocumentLoading" />
+      <xs:element minOccurs="0" name="EnableAuditLogging" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DocumentTask.TaskServer" nillable="true" type="tns:DocumentTask.TaskServer" />
+  <xs:complexType name="DocumentTask.TaskServer.TaskServerAccess">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DocumentTimeout" type="xs:int" />
+      <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/PIX.QMSAPI.DataObjects.Enums" minOccurs="0" name="Download" type="q5:DocumentDownloadAccess" />
+      <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="DownloadUsers" nillable="true" type="q6:ArrayOfstring" />
+      <xs:element minOccurs="0" name="EnableSessionCollaboration" type="xs:boolean" />
+      <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/PIX.QMSAPI.DataObjects.Enums" minOccurs="0" name="Export" type="q7:DocumentDownloadAccess" />
+      <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ExportUsers" nillable="true" type="q8:ArrayOfstring" />
+      <xs:element minOccurs="0" name="MaxConcurrentSessions" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="Methods" type="tns:DocumentAccessMethods" />
+      <xs:element minOccurs="0" name="SessionTimeout" type="xs:int" />
+      <xs:element minOccurs="0" name="ZeroFootprintClientURL" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DocumentTask.TaskServer.TaskServerAccess" nillable="true" type="tns:DocumentTask.TaskServer.TaskServerAccess" />
+  <xs:simpleType name="DocumentAccessMethods">
+    <xs:list>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="None">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Download">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="PluginClient">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="ZeroFootprintClient">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="MobileClient">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">8</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="All">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">65535</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:list>
+  </xs:simpleType>
+  <xs:element name="DocumentAccessMethods" nillable="true" type="tns:DocumentAccessMethods" />
+  <xs:complexType name="DocumentTask.TaskServer.TaskServerCollaboration">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreationMode" type="tns:DocumentCollaborationCreationMode" />
+      <xs:element xmlns:q9="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="CreatorUserNames" nillable="true" type="q9:ArrayOfstring" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DocumentTask.TaskServer.TaskServerCollaboration" nillable="true" type="tns:DocumentTask.TaskServer.TaskServerCollaboration" />
+  <xs:simpleType name="DocumentCollaborationCreationMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="All" />
+      <xs:enumeration value="Restricted" />
+      <xs:enumeration value="None" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="DocumentCollaborationCreationMode" nillable="true" type="tns:DocumentCollaborationCreationMode" />
+  <xs:complexType name="DocumentTask.TaskServer.TaskServerDocumentLoading">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ServerSettings" nillable="true" type="tns:ArrayOfDocumentTask.TaskServer.TaskServerDocumentLoading.TaskServerDocumentLoadServerSetting" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DocumentTask.TaskServer.TaskServerDocumentLoading" nillable="true" type="tns:DocumentTask.TaskServer.TaskServerDocumentLoading" />
+  <xs:complexType name="ArrayOfDocumentTask.TaskServer.TaskServerDocumentLoading.TaskServerDocumentLoadServerSetting">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DocumentTask.TaskServer.TaskServerDocumentLoading.TaskServerDocumentLoadServerSetting" nillable="true" type="tns:DocumentTask.TaskServer.TaskServerDocumentLoading.TaskServerDocumentLoadServerSetting" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDocumentTask.TaskServer.TaskServerDocumentLoading.TaskServerDocumentLoadServerSetting" nillable="true" type="tns:ArrayOfDocumentTask.TaskServer.TaskServerDocumentLoading.TaskServerDocumentLoadServerSetting" />
+  <xs:complexType name="DocumentTask.TaskServer.TaskServerDocumentLoading.TaskServerDocumentLoadServerSetting">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ClusterSettings" nillable="true" type="tns:ArrayOfDocumentTask.TaskServer.TaskServerDocumentLoading.TaskServerDocumentLoadServerSetting.TaskDocumentLoadClusterSetting" />
+      <xs:element minOccurs="0" name="Mode" type="tns:ServerDocumentLoadMode" />
+      <xs:element minOccurs="0" name="QlikViewServerId" type="ser:guid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DocumentTask.TaskServer.TaskServerDocumentLoading.TaskServerDocumentLoadServerSetting" nillable="true" type="tns:DocumentTask.TaskServer.TaskServerDocumentLoading.TaskServerDocumentLoadServerSetting" />
+  <xs:complexType name="ArrayOfDocumentTask.TaskServer.TaskServerDocumentLoading.TaskServerDocumentLoadServerSetting.TaskDocumentLoadClusterSetting">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DocumentTask.TaskServer.TaskServerDocumentLoading.TaskServerDocumentLoadServerSetting.TaskDocumentLoadClusterSetting" nillable="true" type="tns:DocumentTask.TaskServer.TaskServerDocumentLoading.TaskServerDocumentLoadServerSetting.TaskDocumentLoadClusterSetting" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDocumentTask.TaskServer.TaskServerDocumentLoading.TaskServerDocumentLoadServerSetting.TaskDocumentLoadClusterSetting" nillable="true" type="tns:ArrayOfDocumentTask.TaskServer.TaskServerDocumentLoading.TaskServerDocumentLoadServerSetting.TaskDocumentLoadClusterSetting" />
+  <xs:complexType name="DocumentTask.TaskServer.TaskServerDocumentLoading.TaskServerDocumentLoadServerSetting.TaskDocumentLoadClusterSetting">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Mode" type="tns:DocumentLoadMode" />
+      <xs:element minOccurs="0" name="QlikViewServerClusterNodeId" type="ser:guid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DocumentTask.TaskServer.TaskServerDocumentLoading.TaskServerDocumentLoadServerSetting.TaskDocumentLoadClusterSetting" nillable="true" type="tns:DocumentTask.TaskServer.TaskServerDocumentLoading.TaskServerDocumentLoadServerSetting.TaskDocumentLoadClusterSetting" />
+  <xs:simpleType name="DocumentLoadMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Allow" />
+      <xs:enumeration value="Never" />
+      <xs:enumeration value="Preload" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="DocumentLoadMode" nillable="true" type="tns:DocumentLoadMode" />
+  <xs:simpleType name="ServerDocumentLoadMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Allow" />
+      <xs:enumeration value="Preload" />
+      <xs:enumeration value="Granular" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ServerDocumentLoadMode" nillable="true" type="tns:ServerDocumentLoadMode" />
+  <xs:complexType name="DocumentTask.TaskTriggering">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ExecutionAttempts" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="ExecutionTimeout" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="TaskDependencies" nillable="true" type="tns:ArrayOfTaskInfo" />
+      <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/PIX.QMSAPI.DataObjects.Triggers" minOccurs="0" name="Triggers" nillable="true" type="q10:ArrayOfTrigger" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DocumentTask.TaskTriggering" nillable="true" type="tns:DocumentTask.TaskTriggering" />
+  <xs:simpleType name="TaskTriggerType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="OnceTrigger">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="HourlyTrigger">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DailyTrigger">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="WeeklyTrigger">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MonthlyTrigger">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">5</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ContinuousTrigger">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">6</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ExternalEventTrigger">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">7</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TaskFinishedTrigger">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">8</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TaskFailedTrigger">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">9</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AndTrigger">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">10</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="TaskTriggerType" nillable="true" type="tns:TaskTriggerType" />
+  <xs:complexType name="ArrayOfSectionAccessTable">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SectionAccessTable" nillable="true" type="tns:SectionAccessTable" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSectionAccessTable" nillable="true" type="tns:ArrayOfSectionAccessTable" />
+  <xs:complexType name="SectionAccessTable">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Columns" nillable="true" type="tns:ArrayOfSectionAccessTable.SectionAccessColumn" />
+      <xs:element minOccurs="0" name="ID" type="ser:guid" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Roles" nillable="true" type="q11:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Rows" nillable="true" type="tns:ArrayOfSectionAccessTable.SectionAccessRow" />
+      <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/PIX.QMSAPI.DataObjects.Enums" minOccurs="0" name="Scope" type="q12:SectionAccessScope" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SectionAccessTable" nillable="true" type="tns:SectionAccessTable" />
+  <xs:complexType name="ArrayOfSectionAccessTable.SectionAccessColumn">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SectionAccessTable.SectionAccessColumn" nillable="true" type="tns:SectionAccessTable.SectionAccessColumn" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSectionAccessTable.SectionAccessColumn" nillable="true" type="tns:ArrayOfSectionAccessTable.SectionAccessColumn" />
+  <xs:complexType name="SectionAccessTable.SectionAccessColumn">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SectionAccessTable.SectionAccessColumn" nillable="true" type="tns:SectionAccessTable.SectionAccessColumn" />
+  <xs:complexType name="ArrayOfSectionAccessTable.SectionAccessRow">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SectionAccessTable.SectionAccessRow" nillable="true" type="tns:SectionAccessTable.SectionAccessRow" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSectionAccessTable.SectionAccessRow" nillable="true" type="tns:ArrayOfSectionAccessTable.SectionAccessRow" />
+  <xs:complexType name="SectionAccessTable.SectionAccessRow">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cells" nillable="true" type="tns:ArrayOfSectionAccessTable.SectionAccessCell" />
+      <xs:element minOccurs="0" name="RowNumber" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SectionAccessTable.SectionAccessRow" nillable="true" type="tns:SectionAccessTable.SectionAccessRow" />
+  <xs:complexType name="ArrayOfSectionAccessTable.SectionAccessCell">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SectionAccessTable.SectionAccessCell" nillable="true" type="tns:SectionAccessTable.SectionAccessCell" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSectionAccessTable.SectionAccessCell" nillable="true" type="tns:ArrayOfSectionAccessTable.SectionAccessCell" />
+  <xs:complexType name="SectionAccessTable.SectionAccessCell">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Value" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SectionAccessTable.SectionAccessCell" nillable="true" type="tns:SectionAccessTable.SectionAccessCell" />
+  <xs:complexType name="TriggerEDXTaskResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="EDXTaskStartResult" type="tns:EDXTaskStartResult" />
+      <xs:element minOccurs="0" name="EDXTaskStartResultCode" type="xs:int" />
+      <xs:element minOccurs="0" name="ExecId" type="ser:guid" />
+      <xs:element minOccurs="0" name="Status" type="tns:TaskStatusValue" />
+      <xs:element minOccurs="0" name="TriggeredTasksId" nillable="true" type="tns:ArrayOfTaskExecutionItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TriggerEDXTaskResult" nillable="true" type="tns:TriggerEDXTaskResult" />
+  <xs:simpleType name="EDXTaskStartResult">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Success" />
+      <xs:enumeration value="TaskNotFound" />
+      <xs:enumeration value="TaskIsAlreadyRunning" />
+      <xs:enumeration value="NoEDXTriggerFound" />
+      <xs:enumeration value="CouldNotDetermineTaskByName">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">7</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FailedToContactDistributionService">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">8</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="OtherError">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">9</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="EDXTaskStartResult" nillable="true" type="tns:EDXTaskStartResult" />
+  <xs:simpleType name="TaskStatusValue">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Waiting">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Running">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Aborting">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Failed">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Warning">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">5</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Completed">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">6</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="TaskStatusValue" nillable="true" type="tns:TaskStatusValue" />
+  <xs:complexType name="ArrayOfTaskExecutionItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TaskExecutionItem" nillable="true" type="tns:TaskExecutionItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTaskExecutionItem" nillable="true" type="tns:ArrayOfTaskExecutionItem" />
+  <xs:complexType name="TaskExecutionItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ExecId" type="ser:guid" />
+      <xs:element minOccurs="0" name="TaskId" type="ser:guid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TaskExecutionItem" nillable="true" type="tns:TaskExecutionItem" />
+  <xs:complexType name="EDXStatus">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Category" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DocumentPath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ExecId" type="ser:guid" />
+      <xs:element minOccurs="0" name="FinishTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LogFileFullPath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="QdsId" type="ser:guid" />
+      <xs:element minOccurs="0" name="StartTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Summary" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TaskId" type="ser:guid" />
+      <xs:element minOccurs="0" name="TaskName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TaskStartResult" type="tns:EDXTaskStartResult" />
+      <xs:element minOccurs="0" name="TaskStartResultCode" type="xs:int" />
+      <xs:element minOccurs="0" name="TaskStatus" type="tns:TaskStatusValue" />
+      <xs:element minOccurs="0" name="TaskType" type="tns:TaskType" />
+      <xs:element minOccurs="0" name="TriggeredTasksId" nillable="true" type="tns:ArrayOfTaskExecutionItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EDXStatus" nillable="true" type="tns:EDXStatus" />
+  <xs:complexType name="QDSDocumentSessionConfiguration">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ClearLocks" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ClearOneAndOnlyOne" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ClearSelections" type="xs:boolean" />
+      <xs:element minOccurs="0" name="EncryptedSectionAccessUserName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FilePath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GroupName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="QDSID" type="ser:guid" />
+      <xs:element minOccurs="0" name="Reduce" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QDSDocumentSessionConfiguration" nillable="true" type="tns:QDSDocumentSessionConfiguration" />
+  <xs:complexType name="QDSDocumentSession">
+    <xs:sequence>
+      <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/PIX.QMSAPI.DataObjects.Enums" minOccurs="0" name="OpenDocumentResult" type="q13:DocumentState" />
+      <xs:element minOccurs="0" name="QDSID" type="ser:guid" />
+      <xs:element minOccurs="0" name="SessionID" type="ser:guid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QDSDocumentSession" nillable="true" type="tns:QDSDocumentSession" />
+  <xs:simpleType name="DocumentMetaDataScope">
+    <xs:list>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="None">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Authorization">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="DocumentInfo">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Collaboration">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Server">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">8</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Licensing">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">16</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="All">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">65535</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:list>
+  </xs:simpleType>
+  <xs:element name="DocumentMetaDataScope" nillable="true" type="tns:DocumentMetaDataScope" />
+  <xs:complexType name="DocumentMetaData">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Authorization" nillable="true" type="tns:DocumentMetaData.DocumentMetaDataAuthorization" />
+      <xs:element minOccurs="0" name="Collaboration" nillable="true" type="tns:DocumentMetaData.DocumentMetaDataCollaboration" />
+      <xs:element minOccurs="0" name="DocumentInfo" nillable="true" type="tns:DocumentMetaData.DocumentMetaDataDocumentInfo" />
+      <xs:element minOccurs="0" name="Licensing" nillable="true" type="tns:DocumentMetaData.DocumentMetaDataLicensing" />
+      <xs:element minOccurs="0" name="QVSID" type="ser:guid" />
+      <xs:element minOccurs="0" name="Scope" type="tns:DocumentMetaDataScope" />
+      <xs:element minOccurs="0" name="Server" nillable="true" type="tns:DocumentMetaData.DocumentMetaDataServer" />
+      <xs:element minOccurs="0" name="UserDocument" nillable="true" type="tns:DocumentNode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DocumentMetaData" nillable="true" type="tns:DocumentMetaData" />
+  <xs:complexType name="DocumentMetaData.DocumentMetaDataAuthorization">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Access" nillable="true" type="tns:ArrayOfDocumentAccessEntry" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DocumentMetaData.DocumentMetaDataAuthorization" nillable="true" type="tns:DocumentMetaData.DocumentMetaDataAuthorization" />
+  <xs:complexType name="ArrayOfDocumentAccessEntry">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DocumentAccessEntry" nillable="true" type="tns:DocumentAccessEntry" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDocumentAccessEntry" nillable="true" type="tns:ArrayOfDocumentAccessEntry" />
+  <xs:complexType name="DocumentAccessEntry">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AccessMode" type="tns:DocumentAccessEntryMode" />
+      <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="DayOfWeekConstraints" nillable="true" type="q14:ArrayOfDayOfWeek" />
+      <xs:element minOccurs="0" name="IsAnonymous" type="xs:boolean" />
+      <xs:element minOccurs="0" name="TimeConstraintFrom" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="TimeConstraintTo" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DocumentAccessEntry" nillable="true" type="tns:DocumentAccessEntry" />
+  <xs:simpleType name="DocumentAccessEntryMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Always" />
+      <xs:enumeration value="Restricted" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="DocumentAccessEntryMode" nillable="true" type="tns:DocumentAccessEntryMode" />
+  <xs:complexType name="DocumentMetaData.DocumentMetaDataCollaboration">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreationMode" type="tns:DocumentCollaborationCreationMode" />
+      <xs:element xmlns:q15="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="CreatorUserNames" nillable="true" type="q15:ArrayOfstring" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DocumentMetaData.DocumentMetaDataCollaboration" nillable="true" type="tns:DocumentMetaData.DocumentMetaDataCollaboration" />
+  <xs:complexType name="DocumentMetaData.DocumentMetaDataDocumentInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Attributes" nillable="true" type="tns:ArrayOfDocumentAttribute" />
+      <xs:element minOccurs="0" name="Category" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SourceName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DocumentMetaData.DocumentMetaDataDocumentInfo" nillable="true" type="tns:DocumentMetaData.DocumentMetaDataDocumentInfo" />
+  <xs:complexType name="DocumentMetaData.DocumentMetaDataLicensing">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AllowDynamicCALAssignment" type="xs:boolean" />
+      <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/PIX.QMSAPI.DataObjects.CALs" minOccurs="0" name="AssignedCALs" nillable="true" type="q16:ArrayOfAssignedNamedCAL" />
+      <xs:element minOccurs="0" name="CALsAllocated" type="xs:int" />
+      <xs:element minOccurs="0" name="CALsEmbedded" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DocumentMetaData.DocumentMetaDataLicensing" nillable="true" type="tns:DocumentMetaData.DocumentMetaDataLicensing" />
+  <xs:complexType name="DocumentMetaData.DocumentMetaDataServer">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Access" nillable="true" type="tns:DocumentMetaData.DocumentMetaDataServer.DocumentMetaDataServerAccess" />
+      <xs:element minOccurs="0" name="DocumentLoad" nillable="true" type="tns:ArrayOfDocumentMetaData.DocumentMetaDataServer.DocumentMetaDataServerDocumentLoad" />
+      <xs:element minOccurs="0" name="EnableAuditLogging" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ServerDocumentLoadMode" type="tns:ServerDocumentLoadMode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DocumentMetaData.DocumentMetaDataServer" nillable="true" type="tns:DocumentMetaData.DocumentMetaDataServer" />
+  <xs:complexType name="DocumentMetaData.DocumentMetaDataServer.DocumentMetaDataServerAccess">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DocumentTimeout" type="xs:int" />
+      <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/PIX.QMSAPI.DataObjects.Enums" minOccurs="0" name="Download" type="q17:DocumentDownloadAccess" />
+      <xs:element xmlns:q18="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="DownloadUsers" nillable="true" type="q18:ArrayOfstring" />
+      <xs:element minOccurs="0" name="EnableSessionCollaboration" type="xs:boolean" />
+      <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/PIX.QMSAPI.DataObjects.Enums" minOccurs="0" name="Export" type="q19:DocumentDownloadAccess" />
+      <xs:element xmlns:q20="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ExportUsers" nillable="true" type="q20:ArrayOfstring" />
+      <xs:element minOccurs="0" name="MaxConcurrentSessions" type="xs:unsignedInt" />
+      <xs:element minOccurs="0" name="Methods" type="tns:DocumentAccessMethods" />
+      <xs:element minOccurs="0" name="SessionTimeout" type="xs:int" />
+      <xs:element minOccurs="0" name="ZeroFootprintClientURL" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DocumentMetaData.DocumentMetaDataServer.DocumentMetaDataServerAccess" nillable="true" type="tns:DocumentMetaData.DocumentMetaDataServer.DocumentMetaDataServerAccess" />
+  <xs:complexType name="ArrayOfDocumentMetaData.DocumentMetaDataServer.DocumentMetaDataServerDocumentLoad">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DocumentMetaData.DocumentMetaDataServer.DocumentMetaDataServerDocumentLoad" nillable="true" type="tns:DocumentMetaData.DocumentMetaDataServer.DocumentMetaDataServerDocumentLoad" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDocumentMetaData.DocumentMetaDataServer.DocumentMetaDataServerDocumentLoad" nillable="true" type="tns:ArrayOfDocumentMetaData.DocumentMetaDataServer.DocumentMetaDataServerDocumentLoad" />
+  <xs:complexType name="DocumentMetaData.DocumentMetaDataServer.DocumentMetaDataServerDocumentLoad">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Mode" type="tns:DocumentLoadMode" />
+      <xs:element minOccurs="0" name="QlikViewServerClusterNodeId" type="ser:guid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DocumentMetaData.DocumentMetaDataServer.DocumentMetaDataServerDocumentLoad" nillable="true" type="tns:DocumentMetaData.DocumentMetaDataServer.DocumentMetaDataServerDocumentLoad" />
+  <xs:complexType name="ArrayOfCategory">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Category" nillable="true" type="tns:Category" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCategory" nillable="true" type="tns:ArrayOfCategory" />
+  <xs:complexType name="Category">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="ser:guid" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Category" nillable="true" type="tns:Category" />
+  <xs:complexType name="ArrayOfServiceStatus">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ServiceStatus" nillable="true" type="tns:ServiceStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfServiceStatus" nillable="true" type="tns:ArrayOfServiceStatus" />
+  <xs:complexType name="ServiceStatus">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="ser:guid" />
+      <xs:element minOccurs="0" name="MemberStatusDetails" nillable="true" type="tns:ArrayOfServiceStatusDetail" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/PIX.QMSAPI.DataObjects.Enums" minOccurs="0" name="ServiceComposition" type="q21:ServiceComposition" />
+      <xs:element minOccurs="0" name="ServiceType" type="tns:ServiceTypes" />
+      <xs:element minOccurs="0" name="Url" nillable="true" type="xs:anyURI" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ServiceStatus" nillable="true" type="tns:ServiceStatus" />
+  <xs:complexType name="ArrayOfServiceStatusDetail">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ServiceStatusDetail" nillable="true" type="tns:ServiceStatusDetail" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfServiceStatusDetail" nillable="true" type="tns:ArrayOfServiceStatusDetail" />
+  <xs:complexType name="ServiceStatusDetail">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Host" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" type="ser:guid" />
+      <xs:element xmlns:q22="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Message" nillable="true" type="q22:ArrayOfstring" />
+      <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/PIX.QMSAPI.DataObjects.Enums" minOccurs="0" name="Status" type="q23:ServiceStatusFlag" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ServiceStatusDetail" nillable="true" type="tns:ServiceStatusDetail" />
+  <xs:complexType name="ArrayOfTaskStatusNodeRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TaskStatusNodeRequest" nillable="true" type="tns:TaskStatusNodeRequest" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTaskStatusNodeRequest" nillable="true" type="tns:ArrayOfTaskStatusNodeRequest" />
+  <xs:complexType name="TaskStatusNodeRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CategoryName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" type="ser:guid" />
+      <xs:element minOccurs="0" name="QDSID" type="ser:guid" />
+      <xs:element minOccurs="0" name="RootType" type="tns:TaskStatusNodeType" />
+      <xs:element minOccurs="0" name="TaskID" type="ser:guid" />
+      <xs:element minOccurs="0" name="UseFlatTaskList" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TaskStatusNodeRequest" nillable="true" type="tns:TaskStatusNodeRequest" />
+  <xs:simpleType name="TaskStatusNodeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="QDS" />
+      <xs:enumeration value="Category" />
+      <xs:enumeration value="Task" />
+      <xs:enumeration value="DependentTask" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="TaskStatusNodeType" nillable="true" type="tns:TaskStatusNodeType" />
+  <xs:complexType name="TaskStatusFilter">
+    <xs:sequence>
+      <xs:element xmlns:q24="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Categories" nillable="true" type="q24:ArrayOfstring" />
+      <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/PIX.QMSAPI.DataObjects.Enums" minOccurs="0" name="EnabledState" type="q25:EnabledState" />
+      <xs:element minOccurs="0" name="LastExecution" nillable="true" type="tns:TaskStatusFilter.LastExecutionInterval" />
+      <xs:element xmlns:q26="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="QDSIds" nillable="true" type="q26:ArrayOfguid" />
+      <xs:element minOccurs="0" name="Schedule" nillable="true" type="tns:TaskStatusFilter.ScheduleInterval" />
+      <xs:element xmlns:q27="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="TaskIds" nillable="true" type="q27:ArrayOfguid" />
+      <xs:element minOccurs="0" name="TaskName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TaskStatuses" nillable="true" type="tns:ArrayOfTaskStatusValue" />
+      <xs:element minOccurs="0" name="TaskTypes" nillable="true" type="tns:ArrayOfTaskType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TaskStatusFilter" nillable="true" type="tns:TaskStatusFilter" />
+  <xs:complexType name="TaskStatusFilter.LastExecutionInterval">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:TaskStatusFilter.Interval">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="IncludeNever" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TaskStatusFilter.LastExecutionInterval" nillable="true" type="tns:TaskStatusFilter.LastExecutionInterval" />
+  <xs:complexType name="TaskStatusFilter.Interval">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="From" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="To" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TaskStatusFilter.Interval" nillable="true" type="tns:TaskStatusFilter.Interval" />
+  <xs:complexType name="TaskStatusFilter.ScheduleInterval">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:TaskStatusFilter.Interval">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="IncludeNotScheduled" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IncludeOnEvent" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IncludeOnExternalEvent" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IncludeOnMultipleEvents" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TaskStatusFilter.ScheduleInterval" nillable="true" type="tns:TaskStatusFilter.ScheduleInterval" />
+  <xs:complexType name="ArrayOfTaskStatusValue">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TaskStatusValue" type="tns:TaskStatusValue" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTaskStatusValue" nillable="true" type="tns:ArrayOfTaskStatusValue" />
+  <xs:complexType name="ArrayOfTaskType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TaskType" type="tns:TaskType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTaskType" nillable="true" type="tns:ArrayOfTaskType" />
+  <xs:simpleType name="TaskStatusScope">
+    <xs:list>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="None">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="General">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Extended">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="All">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">65535</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:list>
+  </xs:simpleType>
+  <xs:element name="TaskStatusScope" nillable="true" type="tns:TaskStatusScope" />
+  <xs:complexType name="ArrayOfTaskStatusNode">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TaskStatusNode" nillable="true" type="tns:TaskStatusNode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTaskStatusNode" nillable="true" type="tns:ArrayOfTaskStatusNode" />
+  <xs:complexType name="TaskStatusNode">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FailCount" type="xs:int" />
+      <xs:element minOccurs="0" name="HasChildren" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ID" type="ser:guid" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ParentID" type="ser:guid" />
+      <xs:element minOccurs="0" name="RequestID" type="ser:guid" />
+      <xs:element minOccurs="0" name="RootType" type="tns:TaskStatusNodeType" />
+      <xs:element minOccurs="0" name="RunCount" type="xs:int" />
+      <xs:element minOccurs="0" name="Status" type="tns:TaskStatusValue" />
+      <xs:element minOccurs="0" name="TaskStatus" nillable="true" type="tns:TaskStatus" />
+      <xs:element minOccurs="0" name="Type" type="tns:TaskStatusNodeType" />
+      <xs:element minOccurs="0" name="WarningCount" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TaskStatusNode" nillable="true" type="tns:TaskStatusNode" />
+  <xs:complexType name="TaskStatus">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Extended" nillable="true" type="tns:TaskStatus.TaskStatusExtended" />
+      <xs:element minOccurs="0" name="General" nillable="true" type="tns:TaskStatus.TaskStatusGeneral" />
+      <xs:element minOccurs="0" name="Scope" type="tns:TaskStatusScope" />
+      <xs:element minOccurs="0" name="TaskID" type="ser:guid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TaskStatus" nillable="true" type="tns:TaskStatus" />
+  <xs:complexType name="TaskStatus.TaskStatusExtended">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Category" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DocumentPath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FinishedTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LastLogMessages" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="QDSID" type="ser:guid" />
+      <xs:element minOccurs="0" name="StartTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TaskSummary" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TaskStatus.TaskStatusExtended" nillable="true" type="tns:TaskStatus.TaskStatusExtended" />
+  <xs:complexType name="TaskStatus.TaskStatusGeneral">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Status" type="tns:TaskStatusValue" />
+      <xs:element minOccurs="0" name="TaskName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TaskType" type="tns:TaskType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TaskStatus.TaskStatusGeneral" nillable="true" type="tns:TaskStatus.TaskStatusGeneral" />
+  <xs:complexType name="ArrayOfTaskStatus">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TaskStatus" nillable="true" type="tns:TaskStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTaskStatus" nillable="true" type="tns:ArrayOfTaskStatus" />
+  <xs:complexType name="License">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Control" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Corporation" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Features" nillable="true" type="tns:ArrayOfLicenseFeature" />
+      <xs:element minOccurs="0" name="LEFFile" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LEFOk" type="xs:boolean" />
+      <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/PIX.QMSAPI.DataObjects.Enums" minOccurs="0" name="LicenseType" type="q28:LicenseType" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Serial" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="License" nillable="true" type="tns:License" />
+  <xs:complexType name="ArrayOfLicenseFeature">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="LicenseFeature" nillable="true" type="tns:LicenseFeature" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfLicenseFeature" nillable="true" type="tns:ArrayOfLicenseFeature" />
+  <xs:complexType name="LicenseFeature">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Value" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LicenseFeature" nillable="true" type="tns:LicenseFeature" />
+  <xs:simpleType name="QVSSettingsScope">
+    <xs:list>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="None">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="General">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Folders">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Documents">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Performance">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">8</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Logging">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">16</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Security">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">32</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Cluster">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">64</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Distribution">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">128</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="All">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">65535</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:list>
+  </xs:simpleType>
+  <xs:element name="QVSSettingsScope" nillable="true" type="tns:QVSSettingsScope" />
+  <xs:complexType name="QVSSettings">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cluster" nillable="true" type="tns:QVSSettings.QVSCluster" />
+      <xs:element minOccurs="0" name="Distribution" nillable="true" type="tns:QVSSettings.QVSDistribution" />
+      <xs:element minOccurs="0" name="Documents" nillable="true" type="tns:QVSSettings.QVSDocuments" />
+      <xs:element minOccurs="0" name="Folders" nillable="true" type="tns:QVSSettings.QVSFolders" />
+      <xs:element minOccurs="0" name="General" nillable="true" type="tns:QVSSettings.QVSGeneral" />
+      <xs:element minOccurs="0" name="Logging" nillable="true" type="tns:QVSSettings.QVSLogging" />
+      <xs:element minOccurs="0" name="Performance" nillable="true" type="tns:QVSSettings.QVSPerformance" />
+      <xs:element minOccurs="0" name="QVSID" type="ser:guid" />
+      <xs:element minOccurs="0" name="Scope" type="tns:QVSSettingsScope" />
+      <xs:element minOccurs="0" name="Security" nillable="true" type="tns:QVSSettings.QVSSecurity" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QVSSettings" nillable="true" type="tns:QVSSettings" />
+  <xs:complexType name="QVSSettings.QVSCluster">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AlternateBuildNumber" type="xs:int" />
+      <xs:element minOccurs="0" name="AlternateDocumentRootFolder" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="License" nillable="true" type="tns:QVSSettings.QVSCluster.QVSClusterLicense" />
+      <xs:element minOccurs="0" name="Members" nillable="true" type="tns:ArrayOfQVSClusterMember" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QVSSettings.QVSCluster" nillable="true" type="tns:QVSSettings.QVSCluster" />
+  <xs:complexType name="QVSSettings.QVSCluster.QVSClusterLicense">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AllowsClustering" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ControlNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SerialNumber" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QVSSettings.QVSCluster.QVSClusterLicense" nillable="true" type="tns:QVSSettings.QVSCluster.QVSClusterLicense" />
+  <xs:complexType name="ArrayOfQVSClusterMember">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="QVSClusterMember" nillable="true" type="tns:QVSClusterMember" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfQVSClusterMember" nillable="true" type="tns:ArrayOfQVSClusterMember" />
+  <xs:complexType name="QVSClusterMember">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ExternalMachineName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" type="ser:guid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QVSClusterMember" nillable="true" type="tns:QVSClusterMember" />
+  <xs:complexType name="QVSSettings.QVSDistribution">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Accounts" nillable="true" type="tns:ArrayOfQVSSupervisionAccount" />
+      <xs:element minOccurs="0" name="IsPublisherQDS" type="xs:boolean" />
+      <xs:element minOccurs="0" name="QDSID" type="ser:guid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QVSSettings.QVSDistribution" nillable="true" type="tns:QVSSettings.QVSDistribution" />
+  <xs:complexType name="ArrayOfQVSSupervisionAccount">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="QVSSupervisionAccount" nillable="true" type="tns:QVSSupervisionAccount" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfQVSSupervisionAccount" nillable="true" type="tns:ArrayOfQVSSupervisionAccount" />
+  <xs:complexType name="QVSSupervisionAccount">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AccountName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" type="ser:guid" />
+      <xs:element minOccurs="0" name="MountName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Type" type="tns:QVSSupervisionAccountType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QVSSupervisionAccount" nillable="true" type="tns:QVSSupervisionAccount" />
+  <xs:simpleType name="QVSSupervisionAccountType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="QlikViewServer" />
+      <xs:enumeration value="Mount" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="QVSSupervisionAccountType" nillable="true" type="tns:QVSSupervisionAccountType" />
+  <xs:complexType name="QVSSettings.QVSDocuments">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Objects" nillable="true" type="tns:QVSSettings.QVSDocuments.QVSDocumentsObjects" />
+      <xs:element minOccurs="0" name="Server" nillable="true" type="tns:QVSSettings.QVSDocuments.QVSDocumentsServer" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QVSSettings.QVSDocuments" nillable="true" type="tns:QVSSettings.QVSDocuments" />
+  <xs:complexType name="QVSSettings.QVSDocuments.QVSDocumentsObjects">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AllowMoveObjects" type="xs:boolean" />
+      <xs:element minOccurs="0" name="DefaultLabelOthers" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DefaultLabelTotal" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QVSSettings.QVSDocuments.QVSDocumentsObjects" nillable="true" type="tns:QVSSettings.QVSDocuments.QVSDocumentsObjects" />
+  <xs:complexType name="QVSSettings.QVSDocuments.QVSDocumentsServer">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AllowAnonymousServerBookmarkCollaboration" type="xs:boolean" />
+      <xs:element minOccurs="0" name="AllowDocumentDownload" type="xs:boolean" />
+      <xs:element minOccurs="0" name="AllowDocumentUpload" type="xs:boolean" />
+      <xs:element minOccurs="0" name="AllowPrintAndExport" type="xs:boolean" />
+      <xs:element minOccurs="0" name="AllowServerAnnotations" type="xs:boolean" />
+      <xs:element minOccurs="0" name="AllowServerCollaboration" type="xs:boolean" />
+      <xs:element minOccurs="0" name="AllowSessionCollaboration" type="xs:boolean" />
+      <xs:element minOccurs="0" name="OverlayDocuments" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ProhibitQVPXSessionRecovery" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Timeout" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QVSSettings.QVSDocuments.QVSDocumentsServer" nillable="true" type="tns:QVSSettings.QVSDocuments.QVSDocumentsServer" />
+  <xs:complexType name="QVSSettings.QVSFolders">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="System" nillable="true" type="tns:QVSSettings.QVSFolders.QVSFoldersSystem" />
+      <xs:element minOccurs="0" name="UserDocumentAdministrators" nillable="true" type="tns:ArrayOfQVSFolderAdministrator" />
+      <xs:element minOccurs="0" name="UserDocumentMounts" nillable="true" type="tns:ArrayOfQVSMount" />
+      <xs:element minOccurs="0" name="UserDocumentRootFolder" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QVSSettings.QVSFolders" nillable="true" type="tns:QVSSettings.QVSFolders" />
+  <xs:complexType name="QVSSettings.QVSFolders.QVSFoldersSystem">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ExportTemporaryFolder" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QVSSettings.QVSFolders.QVSFoldersSystem" nillable="true" type="tns:QVSSettings.QVSFolders.QVSFoldersSystem" />
+  <xs:complexType name="ArrayOfQVSFolderAdministrator">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="QVSFolderAdministrator" nillable="true" type="tns:QVSFolderAdministrator" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfQVSFolderAdministrator" nillable="true" type="tns:ArrayOfQVSFolderAdministrator" />
+  <xs:complexType name="QVSFolderAdministrator">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FolderID" type="ser:guid" />
+      <xs:element minOccurs="0" name="FolderType" type="tns:QVSUserDocumentFolderType" />
+      <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QVSFolderAdministrator" nillable="true" type="tns:QVSFolderAdministrator" />
+  <xs:simpleType name="QVSUserDocumentFolderType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Server">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Root">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Mount">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="QVSUserDocumentFolderType" nillable="true" type="tns:QVSUserDocumentFolderType" />
+  <xs:complexType name="ArrayOfQVSMount">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="QVSMount" nillable="true" type="tns:QVSMount" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfQVSMount" nillable="true" type="tns:ArrayOfQVSMount" />
+  <xs:complexType name="QVSMount">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Browsable" type="xs:boolean" />
+      <xs:element minOccurs="0" name="FolderID" type="ser:guid" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Path" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QVSMount" nillable="true" type="tns:QVSMount" />
+  <xs:complexType name="QVSSettings.QVSGeneral">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ShowAlerts" type="xs:boolean" />
+      <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QVSSettings.QVSGeneral" nillable="true" type="tns:QVSSettings.QVSGeneral" />
+  <xs:complexType name="QVSSettings.QVSLogging">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FileSplitMode" type="tns:QVSLogFileSplitMode" />
+      <xs:element minOccurs="0" name="Folder" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Level" nillable="true" type="tns:QVSSettings.QVSLogging.QVSLoggingLevel" />
+      <xs:element minOccurs="0" name="Verbosity" type="tns:QVSLogVerbosity" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QVSSettings.QVSLogging" nillable="true" type="tns:QVSSettings.QVSLogging" />
+  <xs:simpleType name="QVSLogFileSplitMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Never" />
+      <xs:enumeration value="Daily" />
+      <xs:enumeration value="Weekly" />
+      <xs:enumeration value="Monthly" />
+      <xs:enumeration value="Yearly" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="QVSLogFileSplitMode" nillable="true" type="tns:QVSLogFileSplitMode" />
+  <xs:complexType name="QVSSettings.QVSLogging.QVSLoggingLevel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="EnableEventLogging" type="xs:boolean" />
+      <xs:element minOccurs="0" name="EnablePerformanceLogging" type="xs:boolean" />
+      <xs:element minOccurs="0" name="EnableSessionLogging" type="xs:boolean" />
+      <xs:element minOccurs="0" name="PerformanceLoggingInterval" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QVSSettings.QVSLogging.QVSLoggingLevel" nillable="true" type="tns:QVSSettings.QVSLogging.QVSLoggingLevel" />
+  <xs:simpleType name="QVSLogVerbosity">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="High">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">700</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Medium">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">500</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Low">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">300</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="QVSLogVerbosity" nillable="true" type="tns:QVSLogVerbosity" />
+  <xs:complexType name="QVSSettings.QVSPerformance">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CPU" nillable="true" type="tns:QVSSettings.QVSPerformance.QVSPerformanceCPU" />
+      <xs:element minOccurs="0" name="Document" nillable="true" type="tns:QVSSettings.QVSPerformance.QVSPerformanceDocument" />
+      <xs:element minOccurs="0" name="Sessions" nillable="true" type="tns:QVSSettings.QVSPerformance.QVSPerformanceSessions" />
+      <xs:element minOccurs="0" name="WorkingSetMemory" nillable="true" type="tns:QVSSettings.QVSPerformance.QVSPerformanceWorkingSetMemory" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QVSSettings.QVSPerformance" nillable="true" type="tns:QVSSettings.QVSPerformance" />
+  <xs:complexType name="QVSSettings.QVSPerformance.QVSPerformanceCPU">
+    <xs:sequence>
+      <xs:element xmlns:q29="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Affinity" nillable="true" type="q29:ArrayOfboolean" />
+      <xs:element minOccurs="0" name="Throttle" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QVSSettings.QVSPerformance.QVSPerformanceCPU" nillable="true" type="tns:QVSSettings.QVSPerformance.QVSPerformanceCPU" />
+  <xs:complexType name="QVSSettings.QVSPerformance.QVSPerformanceDocument">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AllowDocumentAutoLoad" type="xs:boolean" />
+      <xs:element minOccurs="0" name="MaxChartSymbols" type="xs:int" />
+      <xs:element minOccurs="0" name="ObjectCalculationTimeLimit" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QVSSettings.QVSPerformance.QVSPerformanceDocument" nillable="true" type="tns:QVSSettings.QVSPerformance.QVSPerformanceDocument" />
+  <xs:complexType name="QVSSettings.QVSPerformance.QVSPerformanceSessions">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ConcurrentSessionsTimeout" type="xs:int" />
+      <xs:element minOccurs="0" name="MaxConcurrentSessions" type="xs:int" />
+      <xs:element minOccurs="0" name="MaxInactiveSessionTime" type="xs:int" />
+      <xs:element minOccurs="0" name="MaxTotalSessionTime" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QVSSettings.QVSPerformance.QVSPerformanceSessions" nillable="true" type="tns:QVSSettings.QVSPerformance.QVSPerformanceSessions" />
+  <xs:complexType name="QVSSettings.QVSPerformance.QVSPerformanceWorkingSetMemory">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="HighLimit" type="xs:int" />
+      <xs:element minOccurs="0" name="LowLimit" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QVSSettings.QVSPerformance.QVSPerformanceWorkingSetMemory" nillable="true" type="tns:QVSSettings.QVSPerformance.QVSPerformanceWorkingSetMemory" />
+  <xs:complexType name="QVSSettings.QVSSecurity">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AllowAlternateAdmin" type="xs:boolean" />
+      <xs:element minOccurs="0" name="AllowDynamicUpdate" type="xs:boolean" />
+      <xs:element minOccurs="0" name="AllowExtensions" type="xs:boolean" />
+      <xs:element minOccurs="0" name="AllowServerMacroExecution" type="xs:boolean" />
+      <xs:element minOccurs="0" name="AllowServerSystemAccessMacroExecution" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Authentication" nillable="true" type="tns:QVSSettings.QVSSecurity.QVSSecurityAuthentication" />
+      <xs:element minOccurs="0" name="Authorization" nillable="true" type="tns:QVSSettings.QVSSecurity.QVSSecurityAuthorization" />
+      <xs:element minOccurs="0" name="CompressNetworkTraffic" type="xs:boolean" />
+      <xs:element minOccurs="0" name="EnableAuditLogging" type="tns:QVSAuditLogLevel" />
+      <xs:element minOccurs="0" name="EnableHTTPPush" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ExtensionsFolder" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QVSSettings.QVSSecurity" nillable="true" type="tns:QVSSettings.QVSSecurity" />
+  <xs:complexType name="QVSSettings.QVSSecurity.QVSSecurityAuthentication">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Level" type="tns:QVSAuthenticationLevel" />
+      <xs:element minOccurs="0" name="UseDomainAccountForAnonymous" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QVSSettings.QVSSecurity.QVSSecurityAuthentication" nillable="true" type="tns:QVSSettings.QVSSecurity.QVSSecurityAuthentication" />
+  <xs:simpleType name="QVSAuthenticationLevel">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="AlwaysAnonymous" />
+      <xs:enumeration value="AllowAnonymous" />
+      <xs:enumeration value="ProhibitAnonymous" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="QVSAuthenticationLevel" nillable="true" type="tns:QVSAuthenticationLevel" />
+  <xs:complexType name="QVSSettings.QVSSecurity.QVSSecurityAuthorization">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="UseDMSAuthorization" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QVSSettings.QVSSecurity.QVSSecurityAuthorization" nillable="true" type="tns:QVSSettings.QVSSecurity.QVSSecurityAuthorization" />
+  <xs:simpleType name="QVSAuditLogLevel">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="Basic" />
+      <xs:enumeration value="Detail" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="QVSAuditLogLevel" nillable="true" type="tns:QVSAuditLogLevel" />
+  <xs:simpleType name="QVSCacheObjects">
+    <xs:list>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="None">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="License">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Settings">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="UserDocumentList">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="UserDocumentMetaData">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">8</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="CALConfiguration">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">16</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="All">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">65535</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:list>
+  </xs:simpleType>
+  <xs:element name="QVSCacheObjects" nillable="true" type="tns:QVSCacheObjects" />
+  <xs:complexType name="QDSSettings">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Advanced" nillable="true" type="tns:QDSSettings.QDSAdvanced" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="tns:QDSSettings.QDSEmail" />
+      <xs:element minOccurs="0" name="General" nillable="true" type="tns:QDSSettings.QDSGeneral" />
+      <xs:element minOccurs="0" name="ID" type="ser:guid" />
+      <xs:element minOccurs="0" name="Login" nillable="true" type="tns:QDSSettings.QDSLogin" />
+      <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/PIX.QMSAPI.DataObjects.Enums" minOccurs="0" name="Scope" type="q30:QDSSettingsScope" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QDSSettings" nillable="true" type="tns:QDSSettings" />
+  <xs:complexType name="QDSSettings.QDSAdvanced">
+    <xs:sequence>
+      <xs:element xmlns:q31="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="CPUAffinity" nillable="true" type="q31:ArrayOfboolean" />
+      <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/PIX.QMSAPI.DataObjects.Enums" minOccurs="0" name="CPUPriority" type="q32:CPUPriority" />
+      <xs:element minOccurs="0" name="MaxQvbAdmin" type="xs:int" />
+      <xs:element minOccurs="0" name="MaxQvbDist" type="xs:int" />
+      <xs:element minOccurs="0" name="SectionAccessPassword" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SectionAccessUsername" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QDSSettings.QDSAdvanced" nillable="true" type="tns:QDSSettings.QDSAdvanced" />
+  <xs:complexType name="QDSSettings.QDSEmail">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AlertHtmlBody" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AlertHtmlSubject" nillable="true" type="xs:string" />
+      <xs:element xmlns:q33="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="AlertMailAddresses" nillable="true" type="q33:ArrayOfstring" />
+      <xs:element minOccurs="0" name="AlertPlainBody" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AlertPlainSubject" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AttachmentHtmlBody" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AttachmentHtmlSubject" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AttachmentPlainBody" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AttachmentPlainSubject" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NotifyHtmlBody" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NotifyHtmlSubject" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NotifyPlainBody" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NotifyPlainSubject" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QDSSettings.QDSEmail" nillable="true" type="tns:QDSSettings.QDSEmail" />
+  <xs:complexType name="QDSSettings.QDSGeneral">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ApplicationDataFolder" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ClusterInfo" nillable="true" type="tns:ArrayOfQDSSettings.QDSClusterInfo" />
+      <xs:element minOccurs="0" name="ClusterName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DisableTaskTriggersForDocAdmins" type="xs:boolean" />
+      <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/PIX.QMSAPI.DataObjects.Enums" minOccurs="0" name="LogLevel" type="q34:LogLevel" />
+      <xs:element minOccurs="0" name="SelectedDscID" type="ser:guid" />
+      <xs:element minOccurs="0" name="ShowAlerts" type="xs:boolean" />
+      <xs:element minOccurs="0" name="SourceFolders" nillable="true" type="tns:ArrayOfDocumentFolder" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QDSSettings.QDSGeneral" nillable="true" type="tns:QDSSettings.QDSGeneral" />
+  <xs:complexType name="ArrayOfQDSSettings.QDSClusterInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="QDSSettings.QDSClusterInfo" nillable="true" type="tns:QDSSettings.QDSClusterInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfQDSSettings.QDSClusterInfo" nillable="true" type="tns:ArrayOfQDSSettings.QDSClusterInfo" />
+  <xs:complexType name="QDSSettings.QDSClusterInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Url" nillable="true" type="xs:anyURI" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QDSSettings.QDSClusterInfo" nillable="true" type="tns:QDSSettings.QDSClusterInfo" />
+  <xs:complexType name="QDSSettings.QDSLogin">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QDSSettings.QDSLogin" nillable="true" type="tns:QDSSettings.QDSLogin" />
+</xs:schema>

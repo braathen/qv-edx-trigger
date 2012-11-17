@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/PIX.QMSAPI.DataObjects.CALs" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/PIX.QMSAPI.DataObjects.CALs" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://sesth-rfn:4799/QMS/Service?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="http://sesth-rfn:4799/QMS/Service?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/PIX.QMSAPI.DataObjects" />
+  <xs:complexType name="CALConfiguration">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DocumentCALs" nillable="true" type="tns:CALConfiguration.CALConfigurationDocumentCALs" />
+      <xs:element minOccurs="0" name="NamedCALs" nillable="true" type="tns:CALConfiguration.CALConfigurationNamedCALs" />
+      <xs:element minOccurs="0" name="QVSID" type="ser:guid" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/PIX.QMSAPI.DataObjects" minOccurs="0" name="Scope" type="q1:CALConfigurationScope" />
+      <xs:element minOccurs="0" name="SessionCALs" nillable="true" type="tns:CALConfiguration.CALConfigurationSessionCALs" />
+      <xs:element minOccurs="0" name="Uncapped" type="xs:boolean" />
+      <xs:element minOccurs="0" name="UsageCALs" nillable="true" type="tns:CALConfiguration.CALConfigurationUsageCALs" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CALConfiguration" nillable="true" type="tns:CALConfiguration" />
+  <xs:complexType name="CALConfiguration.CALConfigurationDocumentCALs">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Assigned" type="xs:int" />
+      <xs:element minOccurs="0" name="InLicense" type="xs:int" />
+      <xs:element minOccurs="0" name="Limit" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CALConfiguration.CALConfigurationDocumentCALs" nillable="true" type="tns:CALConfiguration.CALConfigurationDocumentCALs" />
+  <xs:complexType name="CALConfiguration.CALConfigurationNamedCALs">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AllowDynamicAssignment" type="xs:boolean" />
+      <xs:element minOccurs="0" name="AllowLicenseLease" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Assigned" type="xs:int" />
+      <xs:element minOccurs="0" name="AssignedCALs" nillable="true" type="tns:ArrayOfAssignedNamedCAL" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/PIX.QMSAPI.DataObjects" minOccurs="0" name="IdentificationMode" type="q2:NamedCALIdentificationMode" />
+      <xs:element minOccurs="0" name="InLicense" type="xs:int" />
+      <xs:element minOccurs="0" name="LeasedCALs" nillable="true" type="tns:ArrayOfLeasedNamedCAL" />
+      <xs:element minOccurs="0" name="Limit" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CALConfiguration.CALConfigurationNamedCALs" nillable="true" type="tns:CALConfiguration.CALConfigurationNamedCALs" />
+  <xs:complexType name="ArrayOfAssignedNamedCAL">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AssignedNamedCAL" nillable="true" type="tns:AssignedNamedCAL" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAssignedNamedCAL" nillable="true" type="tns:ArrayOfAssignedNamedCAL" />
+  <xs:complexType name="AssignedNamedCAL">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:CAL">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AssignedNamedCAL" nillable="true" type="tns:AssignedNamedCAL" />
+  <xs:complexType name="CAL">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="LastUsed" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="MachineID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="QuarantinedUntil" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CAL" nillable="true" type="tns:CAL" />
+  <xs:complexType name="ArrayOfLeasedNamedCAL">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="LeasedNamedCAL" nillable="true" type="tns:LeasedNamedCAL" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfLeasedNamedCAL" nillable="true" type="tns:ArrayOfLeasedNamedCAL" />
+  <xs:complexType name="LeasedNamedCAL">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:CAL">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="LeasedAt" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="LeasedNamedCAL" nillable="true" type="tns:LeasedNamedCAL" />
+  <xs:complexType name="CALConfiguration.CALConfigurationSessionCALs">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Available" type="xs:int" />
+      <xs:element minOccurs="0" name="InLicense" type="xs:int" />
+      <xs:element minOccurs="0" name="Limit" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CALConfiguration.CALConfigurationSessionCALs" nillable="true" type="tns:CALConfiguration.CALConfigurationSessionCALs" />
+  <xs:complexType name="CALConfiguration.CALConfigurationUsageCALs">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Available" type="xs:int" />
+      <xs:element minOccurs="0" name="InLicense" type="xs:int" />
+      <xs:element minOccurs="0" name="Limit" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CALConfiguration.CALConfigurationUsageCALs" nillable="true" type="tns:CALConfiguration.CALConfigurationUsageCALs" />
+  <xs:complexType name="UserCALs">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DocumentCALs" nillable="true" type="tns:ArrayOfDocumentCAL" />
+      <xs:element minOccurs="0" name="LeasedNamedCALs" nillable="true" type="tns:ArrayOfLeasedNamedCAL" />
+      <xs:element minOccurs="0" name="NamedCAL" nillable="true" type="tns:AssignedNamedCAL" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserCALs" nillable="true" type="tns:UserCALs" />
+  <xs:complexType name="ArrayOfDocumentCAL">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DocumentCAL" nillable="true" type="tns:DocumentCAL" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDocumentCAL" nillable="true" type="tns:ArrayOfDocumentCAL" />
+  <xs:complexType name="DocumentCAL">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:CAL">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="DocumentName" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="DocumentCAL" nillable="true" type="tns:DocumentCAL" />
+</xs:schema>
