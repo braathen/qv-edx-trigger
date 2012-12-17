@@ -5,6 +5,8 @@ QvEDXTrigger is a command line tool for QlikView 11 to trigger External Event Ta
 
 This project aim to both demonstrate and inspire how to work with the QlikView Management Service API (QMS) while at the same time being a useful and fully working example application ready for production use.
 
+[Download Installation Package](http://dl.dropbox.com/u/691880/QvEDXTriggerSetup.exe)
+
 Help screen
 -----------
 
@@ -48,9 +50,6 @@ It's possible to set the default values for Sleep and Timeout in the configurati
 	   <add key="Sleep" value="10" />
 	   <add key="Timeout" value="-1" />
 	</appSettings>
-
-
-It's recommended to schedule and run the tool from a batch file, see below for examples. 
 
 Logging
 -------
