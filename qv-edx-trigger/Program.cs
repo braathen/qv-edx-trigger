@@ -81,7 +81,7 @@ namespace qv_edx_trigger
 
             if (version)
             {
-                Console.WriteLine("QvEDXTrigger version 20121116\n");
+                Console.WriteLine("QvEDXTrigger version 20131011\n");
                 Console.WriteLine("This program comes with ABSOLUTELY NO WARRANTY.");
                 Console.WriteLine("This is free software, and you are welcome to redistribute it");
                 Console.WriteLine("under certain conditions.\n");
@@ -168,7 +168,7 @@ namespace qv_edx_trigger
                     // Trigger the task
                     TriggerEDXTaskResult result = apiClient.TriggerEDXTask(taskInfo.QDSID, taskInfo.Name, t.Password, t.VariableName, t.VariableValues);
 
-                    if(result.EDXTaskStartResultCode == 0)
+                    if (result.EDXTaskStartResult == EDXTaskStartResult.Success)
                     {
                         logProperties.ExecId = result.ExecId.ToString();
 
@@ -181,50 +181,69 @@ namespace qv_edx_trigger
 
                         EDXStatus executionStatus = null;
 
-                        // Wait until the task is completed or TIMEOUT has passed.
-                        SpinWait.SpinUntil(() =>
+                        if(t.TimeOut != 0)
                         {
-                            Thread.Sleep(t.Sleep);
-
-                            // Retrieve a new service key if sleep time is above 18 minutes to be safe (timeout is 20 minutes in QV11)
-                            if (t.Sleep > 18 * 60 * 1000)
+                            // Wait until the task is completed or TIMEOUT has passed.
+                            SpinWait.SpinUntil(() =>
                             {
-                                if (t.Verbosity > 1)
-                                    LogHelper.Log(LogLevel.Info, "GetTimeLimitedServiceKey()", logProperties);
+                                Thread.Sleep(t.Sleep);
 
-                                ServiceKeyClientMessageInspector.ServiceKey = apiClient.GetTimeLimitedServiceKey();
-                            }
+                                // Retrieve a new service key if sleep time is above 18 minutes to be safe (timeout is 20 minutes in QV11)
+                                if (t.Sleep > 18 * 60 * 1000)
+                                {
+                                    if (t.Verbosity > 1)
+                                        LogHelper.Log(LogLevel.Info, "GetTimeLimitedServiceKey()", logProperties);
 
-                            // Get the current state of the task.
-                            executionStatus = apiClient.GetEDXTaskStatus(taskInfo.QDSID, result.ExecId);
+                                    ServiceKeyClientMessageInspector.ServiceKey = apiClient.GetTimeLimitedServiceKey();
+                                }
 
-                            if (t.Verbosity > 1 && executionStatus.TaskStatus == TaskStatusValue.Running)
-                                LogHelper.Log(LogLevel.Info, executionStatus.TaskStatus.ToString(), logProperties);
+                                // Get the current state of the task.
+                                try
+                                {
+                                    executionStatus = apiClient.GetEDXTaskStatus(taskInfo.QDSID, result.ExecId);
+                                }
+                                catch (Exception ex)
+                                {
+                                    LogHelper.Log(LogLevel.Warn, String.Format("{0}", ex.Message.Replace(Environment.NewLine, " ")), logProperties);
+                                }
 
-                            // Return true if the task has completed.
-                            return executionStatus != null && executionStatus.TaskStatus != TaskStatusValue.Running;
-                        }, t.TimeOut);
+                                if (executionStatus != null && t.Verbosity > 1 && executionStatus.TaskStatus != TaskStatusValue.Running)
+                                    LogHelper.Log(LogLevel.Info, executionStatus.TaskStatus.ToString(), logProperties);
 
-                        // Write the result
-                        if (executionStatus != null)
-                        {
-                            if (executionStatus.TaskStatus == TaskStatusValue.Completed)
+                                // Return true if the task has completed.
+                                return executionStatus != null && (executionStatus.TaskStatus != TaskStatusValue.Running && executionStatus.TaskStatus != TaskStatusValue.Waiting);
+                            }, t.TimeOut);
+
+                            // Write the result
+                            if (executionStatus != null)
                             {
-                                TimeSpan span = DateTime.Parse(executionStatus.FinishTime) - DateTime.Parse(executionStatus.StartTime);
-                                LogHelper.Log(LogLevel.Info, String.Format("{0} (Duration: {1})", executionStatus.TaskStatus, span), logProperties);
+                                if (executionStatus.TaskStatus == TaskStatusValue.Completed)
+                                {
+                                    // datetime parsing needs culture formatting, catch it for now and avoid...
+                                    try
+                                    {
+                                        TimeSpan span = DateTime.Parse(executionStatus.FinishTime).Subtract(DateTime.Parse(executionStatus.StartTime));
+                                        LogHelper.Log(LogLevel.Info, String.Format("{0} (Duration: {1})", executionStatus.TaskStatus, span), logProperties);
+
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        LogHelper.Log(LogLevel.Info, String.Format("{0}", executionStatus.TaskStatus), logProperties);
+                                    }
+                                }
+                                else
+                                {
+                                    // If something went wrong, point to the logfile for the task execution
+                                    exitCode = (Int32)executionStatus.TaskStatus;
+                                    LogHelper.Log(LogLevel.Error, String.Format("{0} (Error code: {1})", executionStatus.TaskStatus, exitCode), logProperties);
+                                    LogHelper.Log(LogLevel.Error, "Logfile: " + executionStatus.LogFileFullPath, logProperties);
+                                }
                             }
                             else
                             {
-                                // If something went wrong, point to the logfile for the task execution
-                                exitCode = (Int32)executionStatus.TaskStatus;
-                                LogHelper.Log(LogLevel.Error, String.Format("{0} (Error code: {1})", executionStatus.TaskStatus, exitCode), logProperties);
-                                LogHelper.Log(LogLevel.Error, "Logfile: " + executionStatus.LogFileFullPath, logProperties);
+                                exitCode = 9;
+                                LogHelper.Log(LogLevel.Error, String.Format("Failed to get execution status (Error code: {0})", exitCode), logProperties);
                             }
-                        }
-                        else
-                        {
-                            exitCode = 9;
-                            LogHelper.Log(LogLevel.Error, String.Format("Failed to get execution status (Error code: {0})", exitCode), logProperties);
                         }
                     }
                     else
