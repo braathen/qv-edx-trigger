@@ -81,7 +81,7 @@ namespace qv_edx_trigger
 
             if (version)
             {
-                Console.WriteLine("QvEDXTrigger version 20131011\n");
+                Console.WriteLine("QvEDXTrigger version 20140610\n");
                 Console.WriteLine("This program comes with ABSOLUTELY NO WARRANTY.");
                 Console.WriteLine("This is free software, and you are welcome to redistribute it");
                 Console.WriteLine("under certain conditions.\n");
@@ -166,7 +166,7 @@ namespace qv_edx_trigger
                 if (taskInfo.Name != null)
                 {
                     // Trigger the task
-                    TriggerEDXTaskResult result = apiClient.TriggerEDXTask(taskInfo.QDSID, taskInfo.Name, t.Password, t.VariableName, t.VariableValues);
+                    TriggerEDXTaskResult result = apiClient.TriggerEDXTask(Guid.Empty, taskInfo.Name, t.Password, t.VariableName, t.VariableValues);
 
                     if (result.EDXTaskStartResult == EDXTaskStartResult.Success)
                     {
@@ -200,7 +200,7 @@ namespace qv_edx_trigger
                                 // Get the current state of the task.
                                 try
                                 {
-                                    executionStatus = apiClient.GetEDXTaskStatus(taskInfo.QDSID, result.ExecId);
+                                    executionStatus = apiClient.GetEDXTaskStatus(Guid.Empty, result.ExecId);
                                 }
                                 catch (Exception ex)
                                 {
