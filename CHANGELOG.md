@@ -2,7 +2,7 @@
 
 Bugfixes:
 
-  - Using Guid.Empty instead of TaskInfo.QDSID to prevent "Could not find a result for the specified execution ID"
+  - using Guid.Empty instead of TaskInfo.QDSID to prevent "Could not find a result for the specified execution ID"
 
 ## 2013-10-11
 
