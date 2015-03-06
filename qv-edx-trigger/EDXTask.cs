@@ -47,6 +47,13 @@ namespace qv_edx_trigger
             set { _sleep = value * 1000; }
         }
 
+        private int _wait = 10 * 1000;
+        public int Wait
+        {
+            get { return _wait; }
+            set { _wait = value * 1000; }
+        }
+
         public int Verbosity { get; set; }
         public string ServiceAddress { get; set; }
     }

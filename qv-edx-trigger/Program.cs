@@ -46,8 +46,9 @@ namespace qv_edx_trigger
 
             try
             {
-                t.Sleep = Int32.Parse(ConfigurationManager.AppSettings["Sleep"]);
-                t.TimeOut = Int32.Parse(ConfigurationManager.AppSettings["Timeout"]);
+                t.Sleep = ConfigurationManager.AppSettings["Sleep"] != null ? Int32.Parse(ConfigurationManager.AppSettings["Sleep"]) : 10;
+                t.TimeOut = ConfigurationManager.AppSettings["Timeout"] != null ? Int32.Parse(ConfigurationManager.AppSettings["Timeout"]) : -1;
+                t.Wait = ConfigurationManager.AppSettings["Wait"] != null ? Int32.Parse(ConfigurationManager.AppSettings["Wait"]) : 0;
 
                 var p = new OptionSet()
                             {
@@ -56,8 +57,9 @@ namespace qv_edx_trigger
                                 {"variable:", "{Name} of variable to change", v => t.VariableName = v},
                                 {"values:", "{Value(s)} to assign the variable above (semicolon or comma separated)", v =>t.VariableValues = new List<string>(v.Split(new[] {';', ','}, StringSplitOptions.RemoveEmptyEntries))},
                                 {"s|service:", "Location of QlikView Management Service, defaults to {address} in configuration file", v => t.ServiceAddress = v },
-                                {"sleep:", "Sleep number of {seconds} between status polls (default is 10 seconds)", v => t.Sleep = Int32.Parse(v)},
-                                {"timeout:", "Timeout in number of {minutes} (default is indefinitely)",v => t.TimeOut = Int32.Parse(v)},
+                                {"sleep:", "Sleep number of {seconds} between status polls (default is " + t.Sleep / 1000 + " seconds)", v => t.Sleep = Int32.Parse(v)},
+                                {"timeout:", "Timeout in number of {minutes} (default is " + (t.TimeOut < 0 ? "indefinitely" : Convert.ToString(t.TimeOut / 1000 / 60)) + ")",v => t.TimeOut = Int32.Parse(v)},
+                                {"wait:", "Wait number of {seconds} (default is " + t.Wait / 1000 + ") before executing task",v => t.Wait = Int32.Parse(v)},
                                 {"v|verbose", "Increases the verbosity level", v => { if (v != null) ++t.Verbosity; }},
                                 {"V|version", "Show version information", v => version = v != null},
                                 {"?|h|help", "Show usage information", v => help = v != null},
@@ -81,7 +83,7 @@ namespace qv_edx_trigger
 
             if (version)
             {
-                Console.WriteLine("QvEDXTrigger version 20140610\n");
+                Console.WriteLine("QvEDXTrigger version 20150306\n");
                 Console.WriteLine("This program comes with ABSOLUTELY NO WARRANTY.");
                 Console.WriteLine("This is free software, and you are welcome to redistribute it");
                 Console.WriteLine("under certain conditions.\n");
@@ -89,6 +91,12 @@ namespace qv_edx_trigger
                 Console.WriteLine("Home: <https://github.com/braathen/qv-edx-trigger>");
                 Console.WriteLine("Bugs: <https://github.com/braathen/qv-edx-trigger/issues>\n");
                 return;
+            }
+
+            if (t.Wait > 0)
+            {
+                Console.WriteLine("Waiting for " + t.Wait /1000 + " seconds...");
+                Thread.Sleep(t.Wait);
             }
 
             Environment.ExitCode = TriggerTask(t);
