@@ -83,7 +83,7 @@ namespace qv_edx_trigger
 
             if (version)
             {
-                Console.WriteLine("QvEDXTrigger version 20150306\n");
+                Console.WriteLine("QvEDXTrigger version 20150316\n");
                 Console.WriteLine("This program comes with ABSOLUTELY NO WARRANTY.");
                 Console.WriteLine("This is free software, and you are welcome to redistribute it");
                 Console.WriteLine("under certain conditions.\n");
@@ -91,12 +91,6 @@ namespace qv_edx_trigger
                 Console.WriteLine("Home: <https://github.com/braathen/qv-edx-trigger>");
                 Console.WriteLine("Bugs: <https://github.com/braathen/qv-edx-trigger/issues>\n");
                 return;
-            }
-
-            if (t.Wait > 0)
-            {
-                Console.WriteLine("Waiting for " + t.Wait /1000 + " seconds...");
-                Thread.Sleep(t.Wait);
             }
 
             Environment.ExitCode = TriggerTask(t);
@@ -185,6 +179,12 @@ namespace qv_edx_trigger
                             LogHelper.Log(LogLevel.Info, String.Format("Name: {0}, ID: {1}, Enabled: {2}, Sleep: {3} seconds, Timeout: {4}", taskInfo.Name, taskInfo.ID, taskInfo.Enabled ? "Yes" : "No", t.Sleep / 1000, t.TimeOut == -1 ? "Indefinitely" : t.TimeOut / 60000 + " minutes"), logProperties);
                         }
 
+                        if (t.Wait > 0)
+                        {
+                            Console.WriteLine("Waiting for " + t.Wait / 1000 + " seconds...");
+                            Thread.Sleep(t.Wait);
+                        }
+
                         LogHelper.Log(LogLevel.Info, "Started", logProperties);
 
                         EDXStatus executionStatus = null;
@@ -234,7 +234,7 @@ namespace qv_edx_trigger
                                         LogHelper.Log(LogLevel.Info, String.Format("{0} (Duration: {1})", executionStatus.TaskStatus, span), logProperties);
 
                                     }
-                                    catch (Exception ex)
+                                    catch (Exception)
                                     {
                                         LogHelper.Log(LogLevel.Info, String.Format("{0}", executionStatus.TaskStatus), logProperties);
                                     }
