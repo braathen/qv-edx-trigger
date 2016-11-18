@@ -5,8 +5,6 @@ QvEDXTrigger is a command line tool for QlikView 11 to trigger External Event Ta
 
 This project aim to both demonstrate and inspire how to work with the QlikView Management Service API (QMS) while at the same time being a useful and fully working example application ready for production use.
 
-[Download Installation Package](http://dl.dropbox.com/u/691880/QvEDXTriggerSetup.exe)
-
 Help screen
 -----------
 
